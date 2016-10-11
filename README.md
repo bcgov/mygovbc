@@ -47,7 +47,7 @@ To configure a deployment environment (e.g. one of DEV, TEST, PROD) including da
 ```
 cd openshift/templates
 oc project gcpe-mygovbc-dev
-oc process -f mygov-wildfly-environment-template.json -v APPLICATION_DOMAIN=mygovbc-dev.pathfinder.gov.bc.ca -v APP_DEPLOYMENT_TAG=dev -v DATABASE_VOLUME_CAPACITY=1Gi | oc create -f -
+oc process -f mygov-wildfly-environment-template.json -v APPLICATION_DOMAIN=mygovbc-dev.pathfinder.bcgov -v APP_DEPLOYMENT_TAG=dev -v DATABASE_VOLUME_CAPACITY=1Gi | oc create -f -
 ``` 
 
 **Note:** There are additional parameters available which can be seen in the "parameters" section of the file in this repo at openshift/templates/mygov-wildfly-environment-template.json
