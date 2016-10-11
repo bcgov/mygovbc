@@ -65,7 +65,15 @@ oc tag mygovbc-app:latest mygovbc-app:dev
 
 ### First Deployment
 
-The MyGovBC  application will not deploy cleanly within Wildfly upon first deployment due to missing properties files required by the pspd/mygov app.  These must be loaded once manually, and will persist across subsequent deployments.  The command to put the files in place is as follows:
+Prior to a first deployment within an environment, some one-time steps are required.  
+ 
+ The first step is granting "image-puller" access to an environment's service account on the "TOOLS" project.  This is done as follows, adjusting the "gcpe-mygovbc-dev" to match the name of the target deployment environment.
+  
+  ```
+  oc policy add-role-to-user system:image-puller system:serviceaccount:gcpe-mygovbc-dev:default -n gcpe-mygovbc-tools
+  ```
+
+The MyGovBC application will not deploy cleanly within Wildfly upon first deployment due to missing properties files required by the pspd/mygov app.  These must be loaded once manually, and will persist across subsequent deployments.  The command to put the files in place is as follows:
 
 **Note:*** The command below assumes you have a local copy of the properties files in a local directory called "config". Adjust the command below as appropriate if this is not the case. Also, if you are not running in a bash shell, you will need to manually determine the name of the pod running the app and use it in place of the inline oc command.
   
