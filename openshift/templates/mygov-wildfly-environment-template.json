@@ -145,7 +145,7 @@
         "creationTimestamp": null,
         "labels": {
           "app": "${NAME}"
-        },
+        }
       },
       "spec": {
         "strategy": {
@@ -190,9 +190,6 @@
             "labels": {
               "app": "${NAME}",
               "deploymentconfig": "${NAME}"
-            },
-            "annotations": {
-              "openshift.io/container.${NAME}.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
             }
           },
           "spec": {
@@ -270,7 +267,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "mysql",
+        "name": "${DATABASE_SERVICE_NAME}",
         "creationTimestamp": null,
         "labels": {
           "app": "${NAME}",
@@ -394,7 +391,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "war",
+        "name": "${NAME}",
         "creationTimestamp": null,
         "labels": {
           "app": "${NAME}"
@@ -452,13 +449,13 @@
     {
       "name": "APPLICATION_DOMAIN",
       "displayName": "Application Hostname",
-      "description": "The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.",
-      "value": ""
+      "description": "The exposed hostname that will route to the MyGovBC service, if left blank a value will be defaulted.",
+      "value": "mygovbc-dev.pathfinder.gov.bc.ca"
     },
     {
       "name": "DATABASE_SERVICE_NAME",
       "displayName": "Database Service Name",
-      "value": "mongodb"
+      "value": "mysql"
     },
     {
       "name": "DATABASE_USER",
@@ -482,7 +479,7 @@
     {
       "name": "DATABASE_VOLUME_CAPACITY",
       "displayName": "Database Volume Capacity",
-      "description": "Volume space available for mongo database, e.g. 512Mi, 2Gi.",
+      "description": "Volume space available for MySQL database, e.g. 512Mi, 2Gi.",
       "value": "1Gi",
       "required": true
     },
@@ -490,14 +487,14 @@
       "name": "APP_IMAGE_NAME",
       "displayName": "Application image name.",
       "description": "Application image name.",
-      "value": "esm",
+      "value": "mygovbc-app",
       "required": true
     },
     {
       "name": "APP_IMAGE_NAMESPACE",
       "displayName": "Namespace containing application images.",
       "description": "Namespace containing application images.",
-      "value": "esm",
+      "value": "gcpe-mygovbc-tools",
       "required": true
     },
     {
