@@ -81,7 +81,26 @@ The MyGovBC application will not deploy cleanly within Wildfly upon first deploy
 oc rsync config/ $(oc get pods --no-headers -l deploymentconfig=mygovbc-app | awk '{print $1}'):/pspdConfig
 ```
 
+#### Listing Values of Generated Environment Variables
 
+Several values are dynamicall generated in the process of crating the deployment configuration described above.  Within components in the deployment these values are made available by shared environment variables and the components are confgured to use them without further intervention.  However, these values may be needed by developers to interact with application components.  The command below will list the values for use in these cases.  Note "gcpe-mygovbc-dev" should be replaced if not targeting the "dev" environment as each environment will have distinct values.  
+
+```
+oc env dc/mygovbc-app --list -n gcpe-mygovbc-dev
+```
+
+The output will be similar to below.
+
+~~~~
+PSPD_CONFIGURATION=/pspdConfig
+MYSQL_USER=******
+MYSQL_DATABASE=*****
+MYSQL_PASSWORD=*******
+JAVA_OPTS=-Xms1024m -Xmx6g -XX:MaxPermSize=1024m -XX:ReservedCodeCacheSize=64m -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000
+WILDFLY_ADMIN_PASSWORD=*******
+~~~~
+
+The values may be changed using the ```oc env``` command.
 
 
  
