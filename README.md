@@ -10,15 +10,6 @@ In order to complete the steps below, the following pre-requisites must be fulfi
 1. You must have edit or admin access to the projects
 1. An imagestream must exist in the project that will host the build resrouce for the S2I image that will be used to build the wildfly image.  See below for the steps to do this.  
 
-
-### Import an image
-
-If a project exists that already contains the imagestream, it can be imported into another project as follows, provided that you have image-puller permissions on the project containing the imagestream.
-
-```
-oc import-image gcpe-mygovbc-tools/wildfly-100-centos7 --from=172.50.0.2:5000 --confirm
-```
-
 ### Pull and push an image
 
 If no project exists that contains the S2I imagestream needed to build the wildfly project, you can:
