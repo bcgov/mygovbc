@@ -2,6 +2,33 @@
 
 The structure of this repository is compatible with the build and deployment mechanisms in Red Hat OpenShift (Origin/Enterprise/Container Platform).  
 
+## Pre-requisites
+
+In order to complete the steps below, the following pre-requisites must be fulfilled.
+
+1. Project(s) must exist in which the build and deployment resources can be created
+1. You must have edit or admin access to the projects
+1. An imagestream must exist in the project that will host the build resrouce for the S2I image that will be used to build the wildfly image.  See below for the steps to do this.  
+
+
+### Import an image
+
+If a project exists that already contains the imagestream, it can be imported into another project as follows, provided that you have image-puller permissions on the project containing the imagestream.
+
+```
+oc import-image gcpe-mygovbc-tools/wildfly-100-centos7 --from=172.50.0.2:5000 --confirm
+```
+
+### Pull and push an image
+
+If no project exists that contains the S2I imagestream needed to build the wildfly project, you can:
+ 
+ * (**RECOMMENDED**) use the script [here](https://github.com/BCDevOps/openshift-tools/blob/master/utils/import-image.sh) to import the image automatically into the OpenShift Docker registry
+ 
+ or...
+ 
+ * import the image manually from DockerHub following the instructions [here](https://github.com/BCDevOps/issues-and-solutions/wiki/Tips-and-Tricks#pushing-an-image-to-openshift-internal-registry)
+ 
 ## Initial Setup
 
 There are two initial build/deployment models possible with OpenShift - please see below to determine which is apprpriate for your purposes.
