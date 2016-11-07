@@ -386,6 +386,7 @@
                 <http-listener name="default" socket-binding="http" redirect-socket="https"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
+					<access-log pattern="%{i,X-Forwarded-For} %h %{i,SM_UNIVERSALID} %t %H %p %U %q %s %D" prefix="access" worker="default" rotate="true"/>
                     <filter-ref name="server-header"/>
                     <filter-ref name="x-powered-by-header"/>
                 </host>
